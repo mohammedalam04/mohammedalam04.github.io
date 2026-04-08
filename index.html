@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RedactLabs — Cyber Security & IT Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e8001e;
+    --red-dim: #8a0010;
+    --black: #050507;
+    --surface: #0d0d10;
+    --surface2: #14141a;
+    --border: rgba(232,0,30,0.18);
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --mono: 'Share Tech Mono', monospace;
+    --sans: 'Barlow', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(5,5,7,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo span { color: var(--red); }
+
+  .logo .redact {
+    color: var(--text);
+    text-decoration: line-through;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--red); }
+
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--red);
+    text-decoration: none;
+    border: 1px solid var(--red);
+    padding: 0.5rem 1.2rem;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--red); color: #fff; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Grid background */
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,0,30,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,0,30,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 70% at 60% 50%, black 30%, transparent 80%);
+  }
+
+  /* Red glow orb */
+  #hero::after {
+    content: '';
+    position: absolute;
+    right: -10%;
+    top: 10%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(232,0,30,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  .hero-badge::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--red);
+  }
+
+  h1 {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.4s;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--red);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 520px;
+    margin-bottom: 2.8rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.6s;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.8s;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.9rem 2.2rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.08);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+
+  .btn-primary:hover::after { transform: translateX(0); }
+  .btn-primary:hover { transform: translateY(-2px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.9rem 2.2rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--red); color: var(--red); }
+
+  /* ─── STATS STRIP ─── */
+  .stats-strip {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    padding: 2rem 4rem;
+    display: flex;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 0 2rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 2.2rem;
+    color: var(--red);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 7rem 4rem; }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--surface); }
+
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .service-card {
+    background: var(--surface2);
+    padding: 2.4rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s;
+    cursor: default;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--red);
+    transition: width 0.35s ease;
+  }
+
+  .service-card:hover { background: #16161e; }
+  .service-card:hover::before { width: 100%; }
+
+  .service-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 1.4rem;
+    opacity: 0.85;
+  }
+
+  .service-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+
+  .service-card p {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .service-num {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.8rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: rgba(232,0,30,0.3);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── ABOUT / APPROACH ─── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+    height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Radar animation */
+  .radar {
+    position: relative;
+    width: 340px;
+    height: 340px;
+  }
+
+  .radar-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(232,0,30,0.2);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .radar-ring:nth-child(1) { width: 100%; height: 100%; }
+  .radar-ring:nth-child(2) { width: 70%; height: 70%; }
+  .radar-ring:nth-child(3) { width: 42%; height: 42%; border-color: rgba(232,0,30,0.4); }
+
+  .radar-sweep {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(transparent 270deg, rgba(232,0,30,0.4) 360deg);
+    animation: sweep 3s linear infinite;
+  }
+
+  .radar-center {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 16px var(--red);
+  }
+
+  .radar-cross {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .radar-cross::before, .radar-cross::after {
+    content: '';
+    position: absolute;
+    background: rgba(232,0,30,0.15);
+  }
+
+  .radar-cross::before { width: 1px; height: 100%; }
+  .radar-cross::after { width: 100%; height: 1px; }
+
+  /* Blips */
+  .blip {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 8px var(--red);
+    animation: blipFade 3s ease-in-out infinite;
+  }
+
+  .blip:nth-child(5) { top: 28%; left: 58%; animation-delay: 0.8s; }
+  .blip:nth-child(6) { top: 62%; left: 35%; animation-delay: 1.6s; }
+  .blip:nth-child(7) { top: 42%; left: 72%; animation-delay: 2.1s; }
+
+  .about-text .section-title { margin-bottom: 1.5rem; }
+
+  .about-text p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .pillars {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .pillar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+
+  .pillar::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--red);
+    flex-shrink: 0;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--surface);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(232,0,30,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .contact-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+
+  .contact-inner .section-title { margin-bottom: 1rem; }
+  .contact-inner .section-sub { margin: 0 auto 2.5rem; }
+
+  .contact-email {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--red);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(232,0,30,0.3);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .contact-email:hover { border-color: var(--red); }
+
+  .contact-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--border);
+    margin: 2rem auto;
+  }
+
+  .contact-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  footer span { color: var(--red); }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--red); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes sweep {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  @keyframes blipFade {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    40%, 60% { opacity: 1; transform: scale(1); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section, #hero { padding: 5rem 1.5rem; }
+    .stats-strip { padding: 1.5rem; flex-wrap: wrap; gap: 1.5rem; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-visual { display: none; }
+    footer { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <span>[</span><span class="redact">REDACT</span><span>]</span>LABS
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get a Quote</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Full Spectrum Security & IT</div>
+    <h1>
+      Protect.<br>
+      <em>Deploy.</em>
+      Secure.
+    </h1>
+    <p class="hero-sub">
+      RedactLabs delivers enterprise-grade cyber security and IT services to individuals and businesses — from threat auditing and network hardening to large-scale event infrastructure.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">View Services</a>
+      <a href="#contact" class="btn-secondary">Talk to Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat">
+    <span class="stat-num">24/7</span>
+    <span class="stat-label">Support Coverage</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">360°</span>
+    <span class="stat-label">Security Auditing</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">SMB+</span>
+    <span class="stat-label">Enterprise Ready</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">End-to-End</span>
+    <span class="stat-label">Event IT Solutions</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-tag">// What We Do</div>
+      <div class="section-title">Our Services</div>
+    </div>
+    <p class="section-sub">Every service we offer is executed with precision — whether you're an individual, a startup, or running a 500-person conference.</p>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="service-card">
+      <span class="service-num">01</span>
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 3L4 9V19C4 26.2 10.4 32.9 18 35C25.6 32.9 32 26.2 32 19V9L18 3Z" stroke="#e8001e" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M12 18l4 4 8-8" stroke="#e8001e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>Cyber Security</h3>
+      <p>Personal and business threat protection, vulnerability assessments, firewall hardening, endpoint security, and ongoing monitoring to keep your data safe.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-num">02</span>
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="14" stroke="#e8001e" stroke-width="1.5"/>
+        <circle cx="18" cy="18" r="5" stroke="#e8001e" stroke-width="1.5"/>
+        <path d="M18 4v4M18 28v4M4 18h4M28 18h4" stroke="#e8001e" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <h3>Security Auditing</h3>
+      <p>Comprehensive personal and organizational security audits — identifying exposure points across systems, accounts, and physical environments before attackers do.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-num">03</span>
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="8" width="28" height="18" rx="2" stroke="#e8001e" stroke-width="1.5"/>
+        <path d="M4 14h28M10 8V6M26 8V6" stroke="#e8001e" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="18" cy="20" r="2.5" stroke="#e8001e" stroke-width="1.5"/>
+      </svg>
+      <h3>IT Consultation</h3>
+      <p>Strategic technology planning and advisory for businesses of all sizes. We help you make the right infrastructure and security decisions from day one.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-num">04</span>
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 12h6M6 18h6M6 24h6" stroke="#e8001e" stroke-width="1.5" stroke-linecap="round"/>
+        <rect x="16" y="8" width="14" height="20" rx="1.5" stroke="#e8001e" stroke-width="1.5"/>
+        <circle cx="23" cy="18" r="3" stroke="#e8001e" stroke-width="1.5"/>
+      </svg>
+      <h3>Networking</h3>
+      <p>Design, installation, and maintenance of wired and wireless networks. From small office setups to large-scale event infrastructure — reliable connectivity every time.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-num">05</span>
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 28V14l10-8 10 8v14" stroke="#e8001e" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M14 28v-7h8v7" stroke="#e8001e" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      <h3>Event IT — Setup & Takedown</h3>
+      <p>Full-service IT deployment and decommissioning for conferences, expos, and large-scale events. We handle setup, live support, and clean teardown — end to end.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-num">06</span>
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="9" width="28" height="18" rx="2" stroke="#e8001e" stroke-width="1.5"/>
+        <path d="M4 14h28M12 27v3M24 27v3M9 30h18" stroke="#e8001e" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M13 18l3 3 7-5" stroke="#e8001e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>A/V Panel Setup & Programming</h3>
+      <p>Professional LED panel arrays, display systems, and control programming for events and permanent installs. Precision rigging, signal routing, and show-ready calibration.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-num">07</span>
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="6" width="10" height="10" rx="1.5" stroke="#e8001e" stroke-width="1.5"/>
+        <rect x="20" y="6" width="10" height="10" rx="1.5" stroke="#e8001e" stroke-width="1.5"/>
+        <rect x="6" y="20" width="10" height="10" rx="1.5" stroke="#e8001e" stroke-width="1.5"/>
+        <path d="M25 20v3h-5l5 7" stroke="#e8001e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>Service Desk</h3>
+      <p>Responsive IT helpdesk support for day-to-day technical issues — remote or on-site. Ticket-based or retainer models available for businesses needing ongoing coverage.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-num">08</span>
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="12" r="5" stroke="#e8001e" stroke-width="1.5"/>
+        <path d="M7 30c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#e8001e" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M26 19l3 3-3 3" stroke="#e8001e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>Personal Security</h3>
+      <p>Tailored cyber protection for individuals — account security, device hardening, privacy setup, and guidance on safeguarding your personal digital footprint.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual">
+    <div class="radar">
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-cross"></div>
+      <div class="radar-sweep"></div>
+      <div class="radar-center"></div>
+      <div class="blip"></div>
+      <div class="blip"></div>
+      <div class="blip"></div>
+    </div>
+  </div>
+  <div class="about-text">
+    <div class="section-tag">// Who We Are</div>
+    <div class="section-title">Threat-Aware.<br>Operationally Sharp.</div>
+    <p>RedactLabs was built for a world where digital threats are constant and infrastructure complexity is unavoidable. We bridge the gap between enterprise-grade security practices and the real operational needs of growing businesses and individuals.</p>
+    <p>From spinning up an event's entire IT stack in 48 hours, to quietly hardening a client's home network — we operate with the same rigor regardless of scale.</p>
+    <div class="pillars">
+      <div class="pillar">Proactive Threat Detection</div>
+      <div class="pillar">Rapid Event Deployment</div>
+      <div class="pillar">Vendor-Agnostic Expertise</div>
+      <div class="pillar">Discreet. Professional. Reliable.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-tag">// Get In Touch</div>
+    <div class="section-title">Ready to Secure<br>Your Operations?</div>
+    <p class="section-sub">Whether you need a full security audit, event IT deployment, or just a place to start — reach out and we'll scope it out together.</p>
+    <a href="mailto:contact@redactlabs.ca" class="contact-email">contact@██████████.ca</a>
+    <div class="contact-divider"></div>
+    <div class="contact-actions">
+      <a href="mailto:contact@redactlabs.ca" class="btn-primary">Send a Message</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><span>[</span><span class="redact">REDACT</span><span>]</span>LABS — © 2026 All Rights Reserved</p>
+  <ul class="
