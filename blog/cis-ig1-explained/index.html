@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIS Controls IG1, explained: the 56 safeguards that define baseline cybersecurity | Redact Labs</title>
+<meta name="description" content="A plain-English walkthrough of the 56 CIS IG1 safeguards — what they are, why they exist, and how a small Canadian organisation can work through them without needing enterprise-grade tooling.">
+<meta name="author" content="Redact Labs">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://redactlabs.ca/blog/cis-ig1-explained/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://redactlabs.ca/blog/cis-ig1-explained/">
+<meta property="og:title" content="CIS Controls IG1, explained: the 56 safeguards that define baseline cybersecurity | Redact Labs">
+<meta property="og:description" content="A plain-English walkthrough of the 56 CIS IG1 safeguards — what they are, why they exist, and how a small Canadian organisation can work through them without needing enterprise-grade tooling.">
+<meta property="og:site_name" content="Redact Labs">
+<meta property="og:locale" content="en_CA">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CIS Controls IG1, explained: the 56 safeguards that define baseline cybersecurity | Redact Labs">
+<meta name="twitter:description" content="A plain-English walkthrough of the 56 CIS IG1 safeguards — what they are, why they exist, and how a small Canadian organisation can work through them without needing enterprise-grade tooling.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;900&family=Inter:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "CIS Controls IG1, explained: the 56 safeguards that define baseline cybersecurity",
+  "description": "A plain-English walkthrough of the 56 CIS IG1 safeguards, grouped for Canadian small organisations.",
+  "datePublished": "2026-04-08",
+  "dateModified": "2026-04-08",
+  "author": {
+    "@type": "Organization",
+    "name": "Redact Labs",
+    "url": "https://redactlabs.ca/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Redact Labs",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://redactlabs.ca/assets/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://redactlabs.ca/blog/cis-ig1-explained/"
+  }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand"><span class="bracket">[REDACT]</span>LABS</a>
+    <button class="nav-toggle" aria-label="Toggle navigation">MENU</button>
+    <nav class="nav">
+      <a href="/services/">Services</a>
+      <a href="/industries/charities/">Charities</a>
+      <a href="/about/">About</a>
+      <a href="/blog/">Insights</a>
+      <a href="/faq/">FAQ</a>
+      <a href="/contact/" class="btn">Get a Quote</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumbs"><a href="/">Home</a> <span class="sep">/</span> <a href="/blog/">Insights</a> <span class="sep">/</span> CIS IG1 explained</div>
+    <div class="eyebrow">// Insights</div>
+    <h1>CIS Controls IG1, explained: the 56 safeguards that define baseline cybersecurity</h1>
+    <p class="lede">A plain-English walkthrough of the 56 CIS IG1 safeguards — what they are, why they exist, and how a small Canadian organisation can work through them without needing enterprise-grade tooling.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow prose">
+    <div class="byline">
+      <span>April 8, 2026</span>
+      <span class="sep">·</span>
+      <span>Redact Labs</span>
+      <span class="sep">·</span>
+      <span>15 min read</span>
+    </div>
+
+    <p><strong>The CIS Critical Security Controls are the de-facto global baseline for cybersecurity.</strong> Implementation Group 1 (IG1) — 56 safeguards across 18 control families — is the subset every organisation should meet, regardless of size, industry, or budget. This post walks through IG1 in plain English, groups the safeguards into the ten areas where Canadian SMBs and charities most commonly have gaps, and gives specific first steps for each.</p>
+
+    <h2>What the CIS Controls are and why they matter</h2>
+    <p>The Center for Internet Security (CIS) maintains a prioritised list of 18 controls that collectively cover most of the attack surface of a modern organisation. Each control has multiple safeguards — specific, actionable items. The controls are split into three Implementation Groups (IG1, IG2, IG3) by maturity:</p>
+    <ul>
+      <li><strong>IG1 (56 safeguards):</strong> the baseline. Every organisation should meet this.</li>
+      <li><strong>IG2 (74 safeguards):</strong> adds detection, response, and data-protection maturity. Appropriate for organisations with regulated data or formal compliance obligations.</li>
+      <li><strong>IG3 (23 additional safeguards):</strong> adds advanced threat modelling, red-teaming, and penetration testing. Appropriate for organisations facing targeted attacks or carrying significant risk.</li>
+    </ul>
+
+    <p>IG1 is deliberately achievable with off-the-shelf, nonprofit-tier, or free tooling. It's designed to be within reach of a small organisation. Meeting IG1 is not a certification — there's no IG1 auditor to call — but it's a widely recognised baseline that cyber insurance underwriters, funders, and auditors increasingly use as a reference point.</p>
+
+    <h2>The 18 CIS Controls at a glance</h2>
+    <table class="tier-table">
+      <thead>
+        <tr><th>#</th><th>Control family</th><th>What it covers</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Inventory and Control of Enterprise Assets</td><td>Knowing what devices exist and which are authorised</td></tr>
+        <tr><td>2</td><td>Inventory and Control of Software Assets</td><td>Knowing what software runs on your devices</td></tr>
+        <tr><td>3</td><td>Data Protection</td><td>Classifying, handling, and protecting data</td></tr>
+        <tr><td>4</td><td>Secure Configuration of Enterprise Assets and Software</td><td>Hardening default configurations</td></tr>
+        <tr><td>5</td><td>Account Management</td><td>Creating, managing, and deactivating user accounts</td></tr>
+        <tr><td>6</td><td>Access Control Management</td><td>Granting and revoking access rights</td></tr>
+        <tr><td>7</td><td>Continuous Vulnerability Management</td><td>Finding and fixing known vulnerabilities</td></tr>
+        <tr><td>8</td><td>Audit Log Management</td><td>Collecting and reviewing security-relevant logs</td></tr>
+        <tr><td>9</td><td>Email and Web Browser Protections</td><td>Hardening the most-attacked user-facing apps</td></tr>
+        <tr><td>10</td><td>Malware Defenses</td><td>Anti-malware and endpoint protection</td></tr>
+        <tr><td>11</td><td>Data Recovery</td><td>Backups and the ability to restore</td></tr>
+        <tr><td>12</td><td>Network Infrastructure Management</td><td>Managing routers, switches, firewalls, and WiFi</td></tr>
+        <tr><td>13</td><td>Network Monitoring and Defense</td><td>Detecting malicious network activity</td></tr>
+        <tr><td>14</td><td>Security Awareness and Skills Training</td><td>Training staff to recognise and respond to threats</td></tr>
+        <tr><td>15</td><td>Service Provider Management</td><td>Managing risk from vendors and contractors</td></tr>
+        <tr><td>16</td><td>Application Software Security</td><td>Securely developing or acquiring software</td></tr>
+        <tr><td>17</td><td>Incident Response Management</td><td>Preparing for and responding to incidents</td></tr>
+        <tr><td>18</td><td>Penetration Testing</td><td>Actively testing defenses (IG2/IG3 only)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The ten areas where small Canadian organisations most commonly have gaps</h2>
+    <p>Across hundreds of assessments, the same gaps appear consistently. Work through these ten areas in order and you'll close most of your IG1 gap.</p>
+
+    <h3>1. Asset inventory (Controls 1 and 2)</h3>
+    <p><strong>The gap:</strong> no documented list of what devices and software exist in the organisation.</p>
+    <p><strong>First step:</strong> Open a spreadsheet. Two tabs: Devices (laptops, desktops, tablets, phones used for work) and Software (M365, donor CRM, accounting, everything else). Fill them in as completely as possible over two afternoons. Done.</p>
+
+    <h3>2. Account management (Controls 5 and 6)</h3>
+    <p><strong>The gap:</strong> shared accounts, former staff still active, nobody knows who has admin rights.</p>
+    <p><strong>First step:</strong> List every user account in every system. Map to current staff / board / volunteers. Deactivate anyone no longer associated. Ensure every remaining user has their own account — no shared logins.</p>
+
+    <h3>3. Multi-factor authentication (part of Controls 5 and 6)</h3>
+    <p><strong>The gap:</strong> no MFA anywhere.</p>
+    <p><strong>First step:</strong> Turn on MFA for email, banking, donor system, file storage, and payment processor. This single step closes the largest attack vector in the typical SMB environment.</p>
+
+    <h3>4. Data protection (Control 3)</h3>
+    <p><strong>The gap:</strong> sensitive data in personal email, unsecured spreadsheets, old USB sticks, and Dropbox folders with forgotten passwords.</p>
+    <p><strong>First step:</strong> Identify where donor / financial / HR / health data lives. Consolidate into governed storage (the organisation's OneDrive, Google Drive, or donor CRM). Retire shadow copies.</p>
+
+    <h3>5. Secure configuration (Control 4)</h3>
+    <p><strong>The gap:</strong> default passwords on network equipment, Windows / Mac machines with no hardening, open guest networks.</p>
+    <p><strong>First step:</strong> Change default credentials on every piece of network equipment. Enable automatic security updates on every device. Use CIS Benchmarks (free) as a baseline for Windows, macOS, and M365 configuration.</p>
+
+    <h3>6. Email and browser hardening (Control 9)</h3>
+    <p><strong>The gap:</strong> SPF / DKIM / DMARC not configured; browser plug-ins unmanaged.</p>
+    <p><strong>First step:</strong> Use <a href="https://mxtoolbox.com">mxtoolbox.com</a> to check your email authentication. If SPF, DKIM, or DMARC are missing, work with your email provider or IT support to configure them. Set DMARC policy to "quarantine" or "reject" once you're confident it works.</p>
+
+    <h3>7. Malware defenses (Control 10)</h3>
+    <p><strong>The gap:</strong> no endpoint protection, or only the free Windows Defender with no central management.</p>
+    <p><strong>First step:</strong> Deploy a managed endpoint protection product. Microsoft Defender for Business (bundled with M365 Business Premium) or Bitdefender GravityZone (nonprofit pricing via TechSoup Canada) are both strong fits for small Canadian organisations.</p>
+
+    <h3>8. Backup (Control 11)</h3>
+    <p><strong>The gap:</strong> relying on Microsoft 365 / Google Workspace's built-in retention, which is not a backup.</p>
+    <p><strong>First step:</strong> Deploy an independent backup service (Afi.ai or Dropsuite, both offer nonprofit pricing). Configure daily backup with 90-day retention. Test a restore every quarter.</p>
+
+    <h3>9. Security awareness (Control 14)</h3>
+    <p><strong>The gap:</strong> no training, no phishing simulations, staff click everything.</p>
+    <p><strong>First step:</strong> Deploy a lightweight training platform (KnowBe4 and Hook Security both offer nonprofit pricing). Monthly 5–10 minute micro-training, quarterly phishing simulations. Keep it supportive, not punitive.</p>
+
+    <h3>10. Incident response (Control 17)</h3>
+    <p><strong>The gap:</strong> no plan, no phone tree, nobody knows who to call.</p>
+    <p><strong>First step:</strong> Build an incident phone tree (one page). Include executive director, board chair, IT contact, cyber insurance broker, legal counsel, and the relevant Canadian privacy regulators. Test the top numbers annually.</p>
+
+    <h2>Moving from "mostly IG1" to "fully IG1"</h2>
+    <p>Most small Canadian organisations that have done the ten steps above land somewhere around 60–75% of IG1 coverage. Closing the remaining gap typically requires:</p>
+    <ul>
+      <li>Formal audit logging across critical systems (Control 8)</li>
+      <li>Continuous vulnerability scanning, even if only of internet-facing assets (Control 7)</li>
+      <li>Service provider / vendor risk management (Control 15)</li>
+      <li>Documented security policies beyond the AUP (parts of Controls 1, 2, 3, 5, 14, 17)</li>
+    </ul>
+
+    <p>These final items are where most organisations benefit from external help — not because they're technically difficult, but because they're time-consuming and require the kind of documentation discipline that charities and SMBs often don't have bandwidth for internally.</p>
+
+    <h2>Beyond IG1: when to consider IG2</h2>
+    <p>Move from IG1 to IG2 when:</p>
+    <ul>
+      <li>You handle regulated data (health, youth, financial) that demands stronger controls</li>
+      <li>A funder, client, or insurer explicitly requires it</li>
+      <li>You're pursuing CyberSecure Canada, ISO 27001, or SOC 2 certification</li>
+      <li>Your risk profile has increased (recent incident, high-profile growth, new sensitive data)</li>
+    </ul>
+
+    <p>IG2 adds detection and response capabilities (MDR), formal risk management, and more mature vendor oversight. It's the point at which a managed cybersecurity service becomes genuinely necessary, not optional.</p>
+
+    <hr>
+
+    <p class="muted"><em>If you'd like a written assessment of where your organisation sits against CIS IG1 today, Redact Labs offers a fixed-fee <a href="/services/security-auditing/">security audit</a> that produces an 8–12 page board-ready report including your current IG1 percentage and a specific remediation plan. For Canadian charities, the <a href="/industries/charities/">Posture Snapshot</a> ($497) delivers the same assessment scoped for the sector.</em></p>
+
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="section-label">// Get in touch</div>
+  <h2>Ready to start?</h2>
+  <p>Every engagement begins with a conversation. Tell us what you need and we'll scope it together — no obligation.</p>
+  <div class="hero-actions" style="justify-content: center;">
+    <a href="/contact/" class="btn">Send a Message</a>
+    <a href="mailto:contact@redactlabs.ca" class="btn outline">contact@redactlabs.ca</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="margin-bottom: 1rem;"><span class="bracket">[REDACT]</span>LABS</div>
+        <p>Toronto-based cybersecurity, IT infrastructure, and audio-visual services firm. Serving Canada and the US.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/services/cybersecurity/">Cybersecurity</a></li>
+          <li><a href="/services/security-auditing/">Security Auditing</a></li>
+          <li><a href="/services/it-consultation/">IT Consultation</a></li>
+          <li><a href="/services/event-it/">Event IT</a></li>
+          <li><a href="/services/av-panels/">AV Panels</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/industries/charities/">Charities</a></li>
+          <li><a href="/blog/">Insights</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@redactlabs.ca">contact@redactlabs.ca</a></li>
+          <li><a href="tel:+16477712723">647-771-2723</a></li>
+          <li>Toronto, Ontario, Canada</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Redact Labs — All Rights Reserved</div>
+      <div>Protect. Deploy. Secure.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

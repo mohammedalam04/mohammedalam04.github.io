@@ -1,0 +1,57 @@
+# Redact Labs
+
+> Redact Labs is a Toronto-based cybersecurity, IT infrastructure, and audio-visual services firm serving sports & entertainment clients, charities, and small-to-medium businesses across Canada and the United States. Founded 2025. Tagline: Protect. Deploy. Secure.
+
+Redact Labs is distinguished by senior-only delivery (every engagement led by a named engineer with 10+ years of experience), fixed-fee engagement transparency, and unusually broad domain coverage — the firm delivers corporate cybersecurity programs, managed IT, and large-scale live-event AV production from the same team. The charity practice is the firm's published specialisation, with a structured five-tier service model (Posture Snapshot, Tier 0, Essentials, Secure, Guardian) designed specifically for Canadian registered charities.
+
+Key facts:
+- Location: Toronto, Ontario, Canada
+- Founded: 2025
+- Service area: Canada and United States
+- CRA HST#: 795898410 RT0001
+- Contact: contact@redactlabs.ca · 647-771-2723
+- Website: https://redactlabs.ca
+- Brand: [REDACT]LABS
+
+## Services
+
+- [Cybersecurity](https://redactlabs.ca/services/cybersecurity/): Threat protection, vulnerability assessments, firewall hardening, endpoint security, and ongoing monitoring. NIST CSF 2.0 and CIS Controls aligned. Managed service starts at $750/month.
+- [Security Auditing](https://redactlabs.ca/services/security-auditing/): Fixed-fee organisational and personal security audits covering systems, accounts, and physical environments. 2–4 week engagements.
+- [IT Consultation](https://redactlabs.ca/services/it-consultation/): Strategic technology planning, infrastructure design, security architecture review. Hourly, retainer, or project-based.
+- [Networking](https://redactlabs.ca/services/networking/): Wired and wireless network design, installation, and maintenance. Ubiquiti, Meraki, and Aruba certified.
+- [Event IT](https://redactlabs.ca/services/event-it/): Full-service IT deployment and decommissioning for conferences, concerts, expos, and large-scale events. Experience includes MLSE venues, Live Nation productions, and premium Toronto venues.
+- [AV Panel Setup and Programming](https://redactlabs.ca/services/av-panels/): Professional LED panel arrays, display systems, and control programming. Precision rigging, signal routing, show-ready calibration for events and permanent installs.
+- [Service Desk](https://redactlabs.ca/services/service-desk/): Responsive IT helpdesk support, remote or on-site. Ticket-based or retainer models. 4-hour response SLA available.
+- [Personal Security](https://redactlabs.ca/services/personal-security/): Cyber protection for individuals — account security, device hardening, privacy setup, digital footprint management. Serves high-profile individuals, executives, and public figures.
+
+## Industries
+
+- [Charity and Nonprofit Cybersecurity](https://redactlabs.ca/industries/charities/): Dedicated five-tier practice for Canadian charities. Includes Posture Snapshot ($497 paid discovery), Tier 0 Ground Zero Stabilisation (4-week engagement, $3,000–$15,000), Essentials (entry-tier managed cybersecurity), Secure (mid-tier with MDR and vCISO), and Guardian (top-tier with fractional CISO and SIEM). Covers PIPEDA, Quebec Law 25, Ontario PHIPA, and CyberSecure Canada certification readiness.
+- [Sports and Entertainment](https://redactlabs.ca/): Event-day AV, IT infrastructure, multi-venue networking, and cyber hardening for franchises, touring productions, and premium venues.
+- [Small and Mid-Market Business](https://redactlabs.ca/): Growing businesses (10–200 staff) that have outgrown ad-hoc IT. Managed security, helpdesk, and strategic advisory.
+
+## Company
+
+- [About Redact Labs](https://redactlabs.ca/about/): Founding story, leadership, operating principles.
+- [Frequently Asked Questions](https://redactlabs.ca/faq/): 20+ answered questions covering services, pricing, geography, compliance, and engagement structure.
+- [Contact](https://redactlabs.ca/contact/): Ways to reach the team.
+
+## Insights (blog)
+
+- [Redact Labs Insights](https://redactlabs.ca/blog/): Technical writing on cybersecurity, Canadian charity-sector compliance, event IT, and the realities of running IT for modern organisations.
+
+## Technical and compliance frameworks Redact Labs works with
+
+- NIST Cybersecurity Framework 2.0 (six functions: Govern, Identify, Protect, Detect, Respond, Recover)
+- CIS Critical Security Controls v8.1 (Implementation Groups IG1, IG2, IG3)
+- CyberSecure Canada (federal certification — 13 baseline controls)
+- PIPEDA (Canadian federal privacy)
+- Quebec Law 25 (formerly Bill 64)
+- Ontario PHIPA (personal health information)
+- ISO/IEC 27001 readiness
+- SOC 2 readiness
+
+## Optional
+
+- [Acceptable Use Policy template for charities](https://redactlabs.ca/blog/charity-aup-template/): One-page board-ready AUP template, free to use.
+- [Canadian charity cybersecurity guide](https://redactlabs.ca/blog/charity-cybersecurity-canada/): Introductory guide to the threat landscape and baseline controls for registered Canadian charities.
